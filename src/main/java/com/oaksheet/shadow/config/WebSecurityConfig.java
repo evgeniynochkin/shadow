@@ -17,14 +17,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                    .antMatchers("/", "/home").permitAll() //общий доступ
+                    .antMatchers("/", "/home").permitAll()
+                    .antMatchers("/homeLogin").hasRole("ADMIN")
                     .anyRequest().authenticated()
                 .and()
                     .formLogin()
-                    .loginPage("/login")
-                    .permitAll()
+                    .loginPage("/login").permitAll()
+                    .defaultSuccessUrl("/homeLogin")
                 .and()
                     .logout()
+                    .logoutSuccessUrl("/")
                     .permitAll();
     }
 
@@ -33,10 +35,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public UserDetailsService userDetailsService() {
         UserDetails user =
                 User.withDefaultPasswordEncoder()
-                        .username("user")
+                        .username("admin")
                         .password("1111")
-                        .roles("USER")
+                        .roles("ADMIN")
                         .build();
+//                User.withDefaultPasswordEncoder()
+//                        .username("user")
+//                        .password("user")
+//                        .roles("USER")
+//                        .build();
 
         return new InMemoryUserDetailsManager(user);
     }
