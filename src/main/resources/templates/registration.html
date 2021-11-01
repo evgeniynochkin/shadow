@@ -4,8 +4,8 @@
     <title>Registartion</title>
   </head>
   <body>
-    <a th:if="${#messages}">
-      <h1 th:text="${#messages}">ZZZ</h1>
+    <a th:if="${message}">
+      <h1 th:text="${message}">ZZZ</h1>
     </a>
     <form th:action="@{/registration}" method="post">
       <div><label> User Name : <input type="text" name="email"/> </label></div><br>

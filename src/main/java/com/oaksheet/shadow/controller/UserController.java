@@ -2,6 +2,7 @@ package com.oaksheet.shadow.controller;
 
 import com.oaksheet.shadow.model.User;
 import com.oaksheet.shadow.repository.UserRepository;
+import com.oaksheet.shadow.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +17,8 @@ public class UserController {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private UserService userService;
 
     @GetMapping("/addUser")
     public String addUser(Model model) {
@@ -25,13 +28,18 @@ public class UserController {
     }
 
     @PostMapping("/addUser")
-    public String addUser(@RequestParam String email, @RequestParam String password, Model model) {
+    public String addUser(@RequestParam String email,
+                          @RequestParam String password, Model model) {
         for (User user : userRepository.findAll())
             if (user.getEmail().equals(email))
                 return "/addUser";
 
         User user = new User(email, password);
         userRepository.save(user);
+
+        //создать таблицу для списка дел
+        userService.createUserTables(user);
+
         return "/addUser";
     }
 }
