@@ -37,9 +37,6 @@ public class UserController {
         User user = new User(email, password);
         userRepository.save(user);
 
-        //создать таблицу для списка дел
-        userService.createUserTables(user);
-
         return "/addUser";
     }
 }

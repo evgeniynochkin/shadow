@@ -1,6 +1,7 @@
 package com.oaksheet.shadow.model;
 
 public enum Repit {
+    NONE,
     SUNDAY,
     MONDAY,
     TUESDAY,
