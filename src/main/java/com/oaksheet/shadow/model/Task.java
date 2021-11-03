@@ -17,6 +17,7 @@ public class Task {
     private String taskText;
     private boolean notification;
     private long timeNotification;
+    private boolean isActive;
 
     @ElementCollection(targetClass = Typetask.class, fetch = FetchType.EAGER)
     @CollectionTable(name = "type_task", joinColumns = @JoinColumn(name = "tasks_id"))
@@ -38,5 +39,6 @@ public class Task {
         this.typesTask = typesTask;
         this.repits.add(Repit.NONE);
         this.importances = importances;
+        this.isActive = true;
     }
 }
