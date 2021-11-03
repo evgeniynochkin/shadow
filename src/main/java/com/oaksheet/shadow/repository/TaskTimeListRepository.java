@@ -2,8 +2,9 @@ package com.oaksheet.shadow.repository;
 
 import com.oaksheet.shadow.model.Task;
 import com.oaksheet.shadow.model.TasksTimeList;
+import com.oaksheet.shadow.model.User;
 import org.springframework.data.repository.CrudRepository;
 
-public interface TaskRepository extends CrudRepository<Task, Long> {
-
+public interface TaskTimeListRepository extends CrudRepository<TasksTimeList, Long> {
+    TasksTimeList findAllByUser(User user);
 }

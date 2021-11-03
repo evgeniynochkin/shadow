@@ -19,26 +19,24 @@ public class Task {
     private long timeNotification;
     private boolean isActive;
 
-    @ElementCollection(targetClass = Typetask.class, fetch = FetchType.EAGER)
-    @CollectionTable(name = "type_task", joinColumns = @JoinColumn(name = "tasks_id"))
-    private Set<Typetask> typesTask;
+    @Enumerated
+    private Typetask typesTask;
+
+    @Enumerated
+    private Importance importance;
 
     @ElementCollection(targetClass = Repit.class, fetch = FetchType.EAGER)
     @CollectionTable(name = "repit", joinColumns = @JoinColumn(name = "tasks_id"))
     private Set<Repit> repits;
 
-    @ElementCollection(targetClass = Importance.class, fetch = FetchType.EAGER)
-    @CollectionTable(name = "importance", joinColumns = @JoinColumn(name = "tasks_id"))
-    private Set<Importance> importances;
-
     public Task() { }
 
-    public Task(String taskName, Set<Typetask> typesTask, Set<Importance> importances) {
+    public Task(String taskName, Typetask typesTask, Importance importance) {
         this.taskName = taskName;
         this.notification = false;
         this.typesTask = typesTask;
         this.repits.add(Repit.NONE);
-        this.importances = importances;
+        this.importance = importance;
         this.isActive = true;
     }
 }

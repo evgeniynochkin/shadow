@@ -1,12 +1,11 @@
 package com.oaksheet.shadow.controller;
 
-import com.oaksheet.shadow.model.Importance;
-import com.oaksheet.shadow.model.Task;
-import com.oaksheet.shadow.model.TasksTimeList;
-import com.oaksheet.shadow.model.Typetask;
+import com.oaksheet.shadow.model.*;
 import com.oaksheet.shadow.repository.TaskRepository;
+import com.oaksheet.shadow.repository.TaskTimeListRepository;
 import com.oaksheet.shadow.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,11 +18,11 @@ public class TaskController {
     UserRepository userRepository;
 
     @Autowired
-    TaskRepository taskRepository;
+    TaskTimeListRepository taskTimeListRepository;
 
     @GetMapping("/tasks")
-    public String tasks(Model model) {
-        Iterable<TasksTimeList> tasksTimeLists = taskRepository.findAll();
+    public String tasks(@AuthenticationPrincipal User user, Model model) {
+        Iterable<TasksTimeList> tasksTimeLists = taskTimeListRepository.findAllByUser(user);
         model.addAttribute("tasks", tasksTimeLists);
         return "tasks";
     }
