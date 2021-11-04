@@ -12,6 +12,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
+
 @Controller
 public class TaskController {
     @Autowired
@@ -23,6 +28,7 @@ public class TaskController {
     @GetMapping("/tasks")
     public String tasks(@AuthenticationPrincipal User user, Model model) {
         Iterable<TasksTimeList> tasksTimeLists = taskTimeListRepository.findAllByUser(user);
+
         model.addAttribute("tasks", tasksTimeLists);
         return "tasks";
     }

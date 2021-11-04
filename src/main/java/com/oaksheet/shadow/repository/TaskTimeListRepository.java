@@ -6,5 +6,5 @@ import com.oaksheet.shadow.model.User;
 import org.springframework.data.repository.CrudRepository;
 
 public interface TaskTimeListRepository extends CrudRepository<TasksTimeList, Long> {
-    TasksTimeList findAllByUser(User user);
+    Iterable<TasksTimeList> findAllByUser(User user);
 }
