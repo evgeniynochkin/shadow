@@ -5,10 +5,15 @@
   </head>
   <body>
     <form th:action="@{/addtask}" method="post">
-      <div><label> Name task : <input type="text" name="taskname"/> </label></div><br>
-      <div><label> Password: <input type="password" name="password"/> </label></div><br>
+      <div><label> Название: <input type="text" name="taskname"/> </label></div><br>
+      <div><label> Описание: <input type="text" name="tasktext"/> </label></div><br>
+      <div><label> Дата начала: <input type=" " name="password"/> </label></div><br>
+      <div><label> Время начала: <input type="" name="password"/> </label></div><br>
+      <div><label> Дата и время окончания: <input type="" name="password"/> </label></div><br>
+      <div><label> Важность: <input type="" name="password"/> </label></div><br>
+      <div><label> Напоминание: <input type="" name="password"/> </label></div><br>
+      <div><label> Повторы: <input type="" name="password"/> </label></div><br>
       <div><input type="submit" value="Sign In"/></div>
     </form>
-    <a href="/registration">Add new user</a>
   </body>
 </html>

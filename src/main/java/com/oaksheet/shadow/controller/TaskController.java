@@ -28,8 +28,11 @@ public class TaskController {
     @GetMapping("/tasks")
     public String tasks(@AuthenticationPrincipal User user, Model model) {
         Iterable<TasksTimeList> tasksTimeLists = taskTimeListRepository.findAllByUser(user);
-
-        model.addAttribute("tasks", tasksTimeLists);
+        List<Task> taskList = new ArrayList<>();
+        for (TasksTimeList ttl : tasksTimeLists)
+            taskList.add(ttl.getTask());
+        model.addAttribute("timetasks", tasksTimeLists);
+        model.addAttribute("tasks", taskList);
         return "tasks";
     }
 
