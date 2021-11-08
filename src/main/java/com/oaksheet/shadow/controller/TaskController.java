@@ -12,10 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 @Controller
 public class TaskController {
@@ -38,6 +35,15 @@ public class TaskController {
 
     @GetMapping("/addtask")
     public String addTask(Model model) {
+        List<Typetask> typetaskList = Arrays.asList(Typetask.values());
+        model.addAttribute("typetasks", typetaskList);
+
+        List<Importance> importanceList = Arrays.asList(Importance.values());
+        model.addAttribute("importances", importanceList);
+
+        List<Repit> repitList = Arrays.asList(Repit.values());
+        model.addAttribute("repits", repitList);
+
         return "addtask";
     }
 

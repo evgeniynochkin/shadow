@@ -5,15 +5,46 @@
   </head>
   <body>
     <form th:action="@{/addtask}" method="post">
+      <label> Тип задачи:
+        <div th:each = "typetask : ${typetasks}">
+          <input name="choicetypetask" type="radio" th:value="${typetask}"/><label th:text="${typetask}"></label>
+        </div>
+      </label><br>
+
       <div><label> Название: <input type="text" name="taskname"/> </label></div><br>
       <div><label> Описание: <input type="text" name="tasktext"/> </label></div><br>
-      <div><label> Дата начала: <input type=" " name="password"/> </label></div><br>
-      <div><label> Время начала: <input type="" name="password"/> </label></div><br>
-      <div><label> Дата и время окончания: <input type="" name="password"/> </label></div><br>
-      <div><label> Важность: <input type="" name="password"/> </label></div><br>
-      <div><label> Напоминание: <input type="" name="password"/> </label></div><br>
-      <div><label> Повторы: <input type="" name="password"/> </label></div><br>
-      <div><input type="submit" value="Sign In"/></div>
+      <div><label> Дата начала: <input type="date" name="datebegin"/> </label></div><br>
+      <div><label> Время начала: <input type="time" name="timebegin"/> </label></div><br>
+      <div><label> Дата и время окончания: <input type="datetime-local" name="datetimefinish"/> </label></div><br>
+
+      <label> Важность:
+        <div th:each = "importance : ${importances}">
+          <input name="choiceimportance" type="radio" th:value="${importance}"/><label th:text="${importance}"></label>
+        </div>
+      </label><br>
+
+      <label> Напоминание:
+        <div>
+          <select>
+            <option th:value="yes">Да</option>
+            <option th:value="no">Нет</option>
+          </select>
+        </div>
+      </label><br>
+
+<!--      <label> Напоминание:-->
+<!--        <div>-->
+<!--          <input name="isrepit" type="radio" th:value="yes"/><label th:text="Да"></label>-->
+<!--          <input name="isrepit" type="radio" th:value="no"/><label th:text="Нет"></label>-->
+<!--        </div>-->
+<!--      </label><br>-->
+
+<!--      <div th:if=>-->
+<!--        <label> Повторы:-->
+<!--          <div><input type="checkbox" name=""/> </div>-->
+<!--        </label><br>-->
+<!--      </div>-->
+      <div><input type="submit" value="Создать"/></div>
     </form>
   </body>
 </html>
