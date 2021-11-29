@@ -29,6 +29,8 @@ public class User implements UserDetails {
     public User(String email, String password) {
         this.email = email;
         this.password = password;
+        this.active = true;
+//        this.roles.add(Role.USER);
     }
 
     @Override

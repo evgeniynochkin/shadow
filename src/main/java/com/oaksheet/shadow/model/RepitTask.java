@@ -1,6 +1,6 @@
 package com.oaksheet.shadow.model;
 
-public enum Repit {
+public enum RepitTask {
     NONE,
     SUNDAY,
     MONDAY,

@@ -22,6 +22,9 @@ public class TaskController {
     @Autowired
     TaskTimeListRepository taskTimeListRepository;
 
+    @Autowired
+    TaskRepository taskRepository;
+
     @GetMapping("/tasks")
     public String tasks(@AuthenticationPrincipal User user, Model model) {
         Iterable<TasksTimeList> tasksTimeLists = taskTimeListRepository.findAllByUser(user);
@@ -41,15 +44,17 @@ public class TaskController {
         List<Importance> importanceList = Arrays.asList(Importance.values());
         model.addAttribute("importances", importanceList);
 
-        List<Repit> repitList = Arrays.asList(Repit.values());
-        model.addAttribute("repits", repitList);
+        List<RepitTask> repitTaskList = Arrays.asList(RepitTask.values());
+        model.addAttribute("repits", repitTaskList);
 
         return "addtask";
     }
 
     @PostMapping("/addtask")
-    public String addTask(@RequestParam String taskname, Model model) {
-        Task task = new Task(taskname, Typetask.TIMETABLE, Importance.URGENTLY_IMPORTANTLY);
+    public String addTask(@RequestParam String taskname,
+                          @RequestParam String tasktext, Model model) {
+        Task task = new Task(taskname, tasktext);
+        taskRepository.save(task);
         return "tasks";
     }
 }
